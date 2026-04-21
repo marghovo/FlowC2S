@@ -5,28 +5,18 @@
 
 ---
 
+[![arXiv](https://img.shields.io/badge/arXiv-Paper-B31B1B)](https://arxiv.org/pdf/2604.17625)
+
+
 ## 📄 Abstract
 
-This paper introduces a novel methodology for generating fast and memory-efficient video continuations. Our method, dubbed FlowC2S, fine-tunes a pre-trained text-to-video flow model to learn a vector field between the current and succeeding video chunks. Two design choices are key. First, we introduce inherent optimal couplings, utilizing temporally adjacent video chunks during training as a practical proxy for true optimal couplings, which results in straighter flows. Second, we incorporate target inversion, injecting the inverted latent of the target chunk into the input representation to strengthen correspondences and improve visual fidelity. By flowing directly from current to succeeding frames, instead of the common combination of the current frames with noise to generate a video continuation, we reduce the dimensionality of the model input by a factor of two. The proposed method, fine-tuned from LTXV and Wan, surpasses the state-of-the-art scores across quantitative evaluations with FID and FVD, with as few as five neural function evaluations. We will release the code and model of our method to the public.
+This paper introduces a novel methodology for generating fast and memory-efficient video continuations. Our method, dubbed FlowC2S, fine-tunes a pre-trained text-to-video flow model to learn a vector field between the current and succeeding video chunks. Two design choices are key. First, we introduce inherent optimal couplings, utilizing temporally adjacent video chunks during training as a practical proxy for true optimal couplings, resulting in straighter flows. Second, we incorporate target inversion, injecting the inverted latent of the target chunk into the input representation to strengthen correspondences and improve visual fidelity. By flowing directly from current to succeeding frames, instead of the common combination of current frames with noise to generate a video continuation, we reduce the dimensionality of the model input by a factor of two. The proposed method, fine-tuned from LTXV and Wan, surpasses the state-of-the-art scores across quantitative evaluations with FID and FVD, with as few as five neural function evaluations.
 
 ---
 
 ## 📊 Results
 
-### GPU memory usage
-*Smaller \(k\) means lower GPU memory usage. Best \(k\) values are bolded.*
-
-| Method         | Backbone     | k (MB / 10^6) | b (MB)   |
-|----------------|--------------|---------------:|---------:|
-| Vista          | SVD (1.5B)   | 20244.37       | 18430.21 |
-| GEM            | SVD (1.5B)   | **6934.35**    | 4194.67  |
-| LTXVCondition  | LTXV (2B)    | 7103.22        | -660.92  |
-| Ours           | LTXV (2B)    | **3552.32**    | -308.35  |
-| CausVid        | Wan (1.3B)   | 93.35          | 4003.58  |
-| Ours           | Wan (1.3B)   | **48.64**      | 3998.74  |
-
 ### Qualitative Examples
-#### Note: To comply with the supplementary file size limit (100 MB), .gif files have been compressed. For the best visual quality, please refer to the corresponding .mp4 files provided in the supplementary materials (supplementary videos).
 
 ![](assets/fig_3_7/4.gif)
 ![](assets/fig_3_7/81.gif)
@@ -35,13 +25,13 @@ This paper introduces a novel methodology for generating fast and memory-efficie
 
 ### Ablation on Design Choices
 
-![](assets/plots/combined_loss_FID_FVD.png)
+[//]: # (![]&#40;assets/plots/combined_loss_FID_FVD.png&#41;)
 ![](assets/fig_5_8/21.gif)
 ![](assets/fig_5_8/77.gif)
 
 ### Ablation on Neural Function Evaluations (NFE) and Number of Frames
 
-![](assets/plots/merged_nfe_and_long_video_pred_41.png)
+[//]: # (![]&#40;assets/plots/merged_nfe_and_long_video_pred_41.png&#41;)
 
 #### Ablation on NFE
 
@@ -60,7 +50,7 @@ This paper introduces a novel methodology for generating fast and memory-efficie
 
 ## 🛠️ Installation
 
-Clone the repo and create a environment using requirements.txt
+Clone the repo and create an environment using the requirements.txt
 ```bash
 git clone https://github.com/your-username/flowc2s.git
 cd flowc2s
@@ -154,8 +144,24 @@ accelerate --mixed_precision bf16 scripts/.py \
   --offload
 ```
 
+## Citations
+
+If FlowC2S contributes to your research, please cite the paper:
+
+```
+@article{margaryan2026flowc2s,
+  title   = {FlowC2S: Flowing from Current to Succeeding Frames for Fast and Memory-Efficient Video Continuation},
+  author  = {Hovhannes Margaryan and Quentin Bammey and Christian Sandor},
+  journal = {arXiv preprint arXiv:2604.17625},
+  year    = {2026},
+}
+```
+
 ## Acknowledgments
 
 We thank the authors of [Diffusers](https://github.com/huggingface/diffusers) and [LTX-Video-Trainer](https://github.com/Lightricks/LTX-Video-Trainer) for their valuable open-source contributions.
 We also acknowledge the broader open-source ecosystem (e.g., PyTorch, Hugging Face, etc.) that made our research possible.
 
+## Contact
+
+This repository is under development. If you encounter any issues or have questions, please open a GitHub issue or reach out via email at [marg.hovo@gmail.com](mailto:marg.hovo@gmail.com).
